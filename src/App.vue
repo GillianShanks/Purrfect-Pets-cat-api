@@ -1,28 +1,45 @@
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang="html">
+  <div id="view">
+    <Header />
+    <CatBreeds :breeds="breeds" />
   </div>
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from '@/components/Header';
+import CatBreeds from '@/views/CatBreeds'
 
 export default {
   name: 'app',
+  data(){
+    return{
+      breeds:[]
+    }
+  },
   components: {
-    HelloWorld
+    Header,
+    CatBreeds
   }
 }
 </script>
-
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  body{
+    margin:0;
+  }
+</style>
+
+<style lang="css" scoped>
+
+#view {
+  background-image: url('assets/galaxycat.jpg');
+  height:100vh;
+  background-size: cover;
+  background-position: right;
 }
+
+CatBreeds{
+  margin: 0 auto;
+}
+
 </style>
