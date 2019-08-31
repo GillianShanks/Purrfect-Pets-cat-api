@@ -61,7 +61,7 @@ export default {
   color: white;
   border: 3px solid white;
   border-radius: 8px;
-  width: 50%;
+  width: 60%;
   font-size: 1.4em;
   padding:1em;
   word-wrap:break-word;
@@ -106,6 +106,13 @@ h3{
 img{
   align-content: center;
   width:100%;
+}
+
+@media screen and (max-width: 1000px){
+  #info-pic {
+    flex-direction:column-reverse;
+    align-items: center;
+  }
 }
 
 </style>

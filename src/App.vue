@@ -1,9 +1,11 @@
 <template lang="html">
   <div id="view">
-    <Header />
-    <div id="content">
-      <CatBreeds :breeds="breeds" />
+    <div class="">
+      <Header />
+    </div>
 
+    <div id="content">
+      <router-view :breeds="breeds" :favouriteBreeds="favouriteBreeds"/>
     </div>
   </div>
 
@@ -11,14 +13,33 @@
 
 <script>
 import Header from '@/components/Header';
-import CatBreeds from '@/views/CatBreeds'
+import CatBreeds from '@/views/CatBreeds';
 
 export default {
   name: 'app',
   data(){
     return{
-      breeds:[]
+      breeds: [],
+
     }
+  },
+  computed:{
+    favouriteBreeds:function(){
+      return this.breeds.filter((breed) => {
+        return breed.isFavourite
+      })
+    }
+  },
+  mounted(){
+    fetch('https://api.thecatapi.com/v1/breeds')
+    .then(res => res.json())
+    .then(data => {
+      let breedsData=data;
+      breedsData.forEach((breed) => {
+        breed.isFavourite=false;
+      });
+      this.breeds = breedsData;
+    })
   },
   components: {
     Header,
@@ -43,9 +64,5 @@ export default {
   display:fixed;
 }
 
-#content{
-  display:flex;
-  justify-content: center;
-}
 
 </style>

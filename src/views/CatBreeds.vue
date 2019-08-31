@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="breeds-view">
     <SearchFormCatBreeds :breeds="breeds" />
-    <BreedDetail v-if="breed" :breed="breed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" />
+    <BreedDetail v-if="selectedBreed" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" />
   </div>
 </template>
 
@@ -10,24 +10,21 @@ import SearchFormCatBreeds from '@/components/SearchFormCatBreeds';
 import BreedDetail from '@/components/BreedDetail'
 import {eventBus} from '@/main.js';
 
+
 export default {
   name: "cat-breeds",
+  props:['breeds'],
   data(){
     return{
-      breeds: [],
-      breed: null,
+      selectedBreed: null,
       interestingPoints: [],
       breedImageAPI:"",
       breedImageLink:""
     }
   },
   mounted(){
-    fetch('https://api.thecatapi.com/v1/breeds')
-    .then(res => res.json())
-    .then(data => this.breeds=data)
-
     eventBus.$on('selected-breed', (breed) => {
-      this.breed=breed;
+      this.selectedBreed=breed;
 
       this.interestingPoints= [breed.rare, breed.suppressed_tail, breed.hairless, breed.rex, breed.short_legs, breed.hypoallergenic, breed.lap];
 
@@ -52,7 +49,7 @@ export default {
     flex-direction: column;
     padding-bottom: 1em;
     flex:1;
-    height: 85vh;
+    height: 80vh;
     overflow-y: scroll;
   }
 
