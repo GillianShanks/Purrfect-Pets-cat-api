@@ -1,7 +1,10 @@
 <template lang="html">
   <div id="view">
     <Header />
-    <CatBreeds :breeds="breeds" />
+    <div id="content">
+      <CatBreeds :breeds="breeds" />
+
+    </div>
   </div>
 
 </template>
@@ -35,11 +38,14 @@ export default {
   background-image: url('assets/galaxycat.jpg');
   height:100vh;
   background-size: cover;
-  background-position: right;
+  background-position:right;
+  background-attachment: fixed;
+  display:fixed;
 }
 
-CatBreeds{
-  margin: 0 auto;
+#content{
+  display:flex;
+  justify-content: center;
 }
 
 </style>

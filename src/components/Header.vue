@@ -14,5 +14,7 @@ h1{
   font-size: 4em;
   border-bottom: white 3px solid;
   color: white;
+  width: 100%;
+  white-space: nowrap;
 }
 </style>

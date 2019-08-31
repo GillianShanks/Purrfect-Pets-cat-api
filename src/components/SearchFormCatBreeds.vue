@@ -24,13 +24,13 @@ export default {
   methods:{
     handleChange(){
       this.searchText = "";
-      eventBus.$on("selected-breed", this.selectedBreed)
+      eventBus.$emit("selected-breed", this.selectedBreed)
     },
     searchForBreed(){
       this.selectedBreed = this.breeds.find((breed) => {
         return breed.name.toLowerCase().indexOf(this.searchText.toLowerCase()) > -1;
       });
-      eventBus.$on("selected-breed", this.selectedBreed);
+      eventBus.$emit("selected-breed", this.selectedBreed);
     }
 
   }
