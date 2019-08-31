@@ -4,28 +4,28 @@
       <h2>{{breed.name}}</h2>
       <h3 v-if="breed.alt_names">(alt names: {{breed.alt_names}})</h3>
     </div>
+    <p>Temperament: {{breed.temperament}}</p>
     <div id="info-pic">
-    <div id="info-section">
-      <p>Temperament: {{breed.temperament}}</p>
-      <p>Origin: {{breed.origin}}</p>
-      <p>Life-span: {{breed.life_span}} years</p>
-      <div v-if="interestingList">
-        <p>Interesting points:</p>
-        <ul id="interesting">
-          <li v-if="breed.rare">Is rare</li>
-          <li v-if="breed.suppressed_tail">Has a suppressed tail</li>
-          <li v-if="breed.hairless">Is hairless</li>
-          <li v-if="breed.rex">Is a 'rex' (has curly hair)</li>
-          <li v-if="breed.short_legs"> Has short-legs</li>
-          <li v-if="breed.hypoallergenic">Is hypo-allergenic</li>
-          <li v-if="breed.lap">Tendency to be a lap cat</li>
-        </ul>
+      <div id="info-section">
+        <p>Origin: {{breed.origin}}</p>
+        <p>Life-span: {{breed.life_span}} years</p>
+        <div v-if="interestingList">
+          <p>Interesting points:</p>
+          <ul id="interesting">
+            <li v-if="breed.rare">Is rare</li>
+            <li v-if="breed.suppressed_tail">Has a suppressed tail</li>
+            <li v-if="breed.hairless">Is hairless</li>
+            <li v-if="breed.rex">Is a 'rex' (has curly hair)</li>
+            <li v-if="breed.short_legs"> Has short-legs</li>
+            <li v-if="breed.hypoallergenic">Is hypo-allergenic</li>
+            <li v-if="breed.lap">Tendency to be a lap cat</li>
+          </ul>
+        </div>
       </div>
 
-    </div>
-    <div id="breed-pic">
-      <img src="" alt="">
-    </div>
+      <div id="breed-pic">
+        <img :src="breedImageLink" :alt="breed.name" />
+      </div>
     </div>
     <p>{{breed.description}}</p>
 
@@ -35,10 +35,9 @@
 <script>
 export default {
   name: "breed-detail",
-  props: ['breed', 'interestingPoints', 'breedWikiImageAPI'],
+  props: ['breed', 'interestingPoints', 'breedImageLink'],
   data(){
     return{
-
     }
   },
   computed:{
@@ -49,8 +48,7 @@ export default {
     }
   },
   mounted(){
-    fetch('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles=American_Bobtail')
-    .then(res => console.log(res.json()))
+
   }
 
 }
@@ -91,6 +89,23 @@ h3{
   text-align: center;
   font-weight: lighter;
 
+}
+#info-pic{
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#breed-pic{
+  width: 50%;
+  /* border: 1px solid red; */
+}
+
+img{
+  align-content: center;
+  width:100%;
 }
 
 </style>

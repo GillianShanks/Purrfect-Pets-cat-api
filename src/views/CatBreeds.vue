@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="breeds-view">
     <SearchFormCatBreeds :breeds="breeds" />
-    <BreedDetail v-if="breed" :breed="breed" :interestingPoints="interestingPoints" :breedWikiTitle="breedWikiTitle" />
+    <BreedDetail v-if="breed" :breed="breed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" />
   </div>
 </template>
 
@@ -17,8 +17,8 @@ export default {
       breeds: [],
       breed: null,
       interestingPoints: [],
-      breedWikiTitle:"",
-      breedWikiImageAPI:""
+      breedImageAPI:"",
+      breedImageLink:""
     }
   },
   mounted(){
@@ -31,10 +31,11 @@ export default {
 
       this.interestingPoints= [breed.rare, breed.suppressed_tail, breed.hairless, breed.rex, breed.short_legs, breed.hypoallergenic, breed.lap];
 
-      this.breedWikiTitle = breed.wikipedia_url.substring(breed.wikipedia_url.lastIndexOf('/')+1)
-      .replace(/[()]/g, '');
+      this.breedImageAPI = 'https://api.thecatapi.com/v1/images/search?breed_ids='+breed.id;
 
-      this.breedWikiImageAPI = 'https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=original&titles='+this.breedWikiTitle;
+      fetch(this.breedImageAPI)
+      .then(res => res.json())
+      .then(data => this.breedImageLink = data[0].url)
 
     })
   },
