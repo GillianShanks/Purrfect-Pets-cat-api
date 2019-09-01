@@ -2,7 +2,7 @@
   <div id="breeds-view">
     <SearchFormCatBreeds :breeds="breeds" />
     <h2 v-if="!selectedBreed">Click above or type in the search bar to find what might be your favourite cat breed!</h2>
-    <BreedDetail v-if="selectedBreed" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" />
+    <BreedDetail v-if="selectedBreed" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" :chartData="chartData" :chartOptions="chartOptions" :loading="loading"/>
   </div>
 </template>
 
@@ -20,7 +20,10 @@ export default {
       selectedBreed: null,
       interestingPoints: [],
       breedImageAPI:"",
-      breedImageLink:""
+      breedImageLink:"",
+      chartData:[],
+      chartOptions:{},
+      loading:null
     }
   },
   mounted(){
@@ -34,6 +37,28 @@ export default {
       fetch(this.breedImageAPI)
       .then(res => res.json())
       .then(data => this.breedImageLink = data[0].url)
+
+      this.chartData = [
+        ['Characterist', 'Level'],
+        ['Affection', breed.affection_level],
+        ['Child-Friendly', breed.child_friendly],
+        ['Dog-Friendly', breed.dog_friendly],
+        ['Stranger-Friendly', breed.stranger_friendly],
+        ['Energy Level', breed.energy_level],
+        ['Intelligence', breed.intelligence],
+        ['Health Issues', breed.health_issues],
+        ['Shedding', breed.shedding_level],
+        ['Social Needs', breed.social_needs,],
+        ['Vocalisation',  breed.vocalisation]
+      ],
+      this.chartOptions = {
+        title: 'Characteristics of '+ breed.name,
+        height: 500,
+        backgroundColor: '#82acb3',
+        colors: ['white'],
+        hAxis:{viewWindow:{max:5}}
+      }
+      this.loading=false;
 
     })
   },

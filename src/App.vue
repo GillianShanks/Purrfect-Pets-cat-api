@@ -36,8 +36,14 @@ export default {
     .then(data => {
       let breedsData=data;
       breedsData.forEach((breed) => {
+        //remove alt_names with just a space - doesn't work
+        if (breed.alt_names == " "){
+          return breed.alt_names = breed.alt_names.trim();
+        }
+
         breed.isFavourite=false;
         breed.showMiniBreed=false;
+
       });
       this.breeds = breedsData;
     })

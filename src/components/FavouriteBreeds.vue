@@ -14,7 +14,7 @@
           <FavBreedButton :selectedBreed='breed'/>
 
         </div>
-        <MiniBreedDetails v-if="breed.showMiniBreed" :breed='breed'/>
+        <MiniBreedDetails v-if="breed.showMiniBreed" :breed='breed' />
       </li>
 
     </ul>

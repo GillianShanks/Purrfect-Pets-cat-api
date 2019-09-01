@@ -2,30 +2,21 @@
   <div id="detail-view">
     <div id="title-section">
       <h2>{{breed.name}}</h2>
-      <h3 v-if="breed.alt_names">(alt names: {{breed.alt_names}})</h3>
+      <h3 v-if="breed.alt_names && breed.alt_names !== ' '">(alt names: {{breed.alt_names}})</h3>
     </div>
     <p>Temperament: {{breed.temperament}}</p>
     <div id="info-pic">
       <div id="info-section">
-        <p>Origin: {{breed.origin}}</p>
-        <p>Life-span: {{breed.life_span}} years</p>
-        <BreedDetailGraph />
-        <div v-if="interestingList">
-          <p>Interesting points:</p>
-          <ul id="interesting">
-            <li v-if="breed.rare">Is rare</li>
-            <li v-if="breed.suppressed_tail">Has a suppressed tail</li>
-            <li v-if="breed.hairless">Is hairless</li>
-            <li v-if="breed.rex">Is a 'rex' (has curly hair)</li>
-            <li v-if="breed.short_legs"> Has short-legs</li>
-            <li v-if="breed.hypoallergenic">Is hypo-allergenic</li>
-            <li v-if="breed.lap">Tendency to be a lap cat</li>
-          </ul>
-        </div>
+        <BreedDetailGraph :chartData="chartData" :chartOptions="chartOptions" />
       </div>
 
       <div id="breed-pic">
-        <img :src="breedImageLink" :alt="breed.name" />
+        <h3 v-if="loading">loading image...</h3>
+        <img v-if='!loading' :src="breedImageLink" :alt="breed.name" />
+        <p>Origin: {{breed.origin}}</p>
+        <p>Life-span: {{breed.life_span}} years</p>
+        <BreedInterestingPoints v-if='interestingList' :breed="breed"/>
+
       </div>
     </div>
     <p>{{breed.description}}</p>
@@ -34,10 +25,12 @@
 </template>
 
 <script>
-import BreedDetailGraph from '@/components/BreedDetailGraph'
+import BreedDetailGraph from '@/components/BreedDetailGraph';
+import BreedInterestingPoints from '@/components/BreedInterestingPoints'
+
 export default {
   name: "breed-detail",
-  props: ['breed', 'interestingPoints', 'breedImageLink'],
+  props: ['breed', 'interestingPoints', 'breedImageLink', 'chartData', 'chartOptions', 'loading'],
   data(){
     return{
     }
@@ -51,6 +44,10 @@ export default {
   },
   mounted(){
 
+  },
+  components:{
+    BreedDetailGraph,
+    BreedInterestingPoints
   }
 
 }
@@ -102,8 +99,14 @@ h3{
 
 #breed-pic{
   width: 50%;
-  /* border: 1px solid red; */
 }
+
+#info-section{
+  /* border: 1px solid red; */
+  width: 50%;
+  padding-right: 1em;
+}
+
 
 img{
   align-content: center;
