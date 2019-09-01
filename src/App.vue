@@ -5,7 +5,7 @@
     </div>
 
     <div id="content">
-      <router-view :breeds="breeds" :favouriteBreeds="favouriteBreeds"/>
+      <router-view :breeds="breeds" :favouriteBreeds="favouriteBreeds" :favouriteBreedsData="favouriteBreedsData"/>
     </div>
   </div>
 
@@ -28,6 +28,35 @@ export default {
       return this.breeds.filter((breed) => {
         return breed.isFavourite
       })
+    },
+    favouriteBreedsData: function(){
+      let headingArray = ['Characteristic'];
+      let data1Array = ['Affection']
+      let data2Array = ['Child-Friendly']
+      let data3Array = ['Dog-Friendly']
+      let data4Array = ['Stranger-Friendly']
+      let data5Array = ['Energy']
+      let data6Array = ['Intelligence']
+      let data7Array = ['Health Issues']
+      let data8Array = ['Shedding']
+      let data9Array = ['Social Needs']
+      let data10Array = ['Vocalisation']
+
+      this.favouriteBreeds.forEach((breed) => {
+        headingArray.push(breed.name);
+        data1Array.push(breed.affection_level)
+        data2Array.push(breed.child_friendly)
+        data3Array.push(breed.dog_friendly)
+        data4Array.push(breed.stranger_friendly)
+        data5Array.push(breed.energy_level)
+        data6Array.push(breed.intelligence)
+        data7Array.push(breed.health_issues)
+        data8Array.push(breed.shedding_level)
+        data9Array.push(breed.social_needs)
+        data10Array.push(breed.vocalisation)
+      })
+      let completeDataArray = [headingArray, data1Array, data2Array, data3Array, data4Array, data5Array, data6Array,data7Array,data8Array,data9Array,data10Array];
+      return completeDataArray;
     }
   },
   mounted(){

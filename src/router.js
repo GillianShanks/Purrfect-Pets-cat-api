@@ -12,7 +12,8 @@ const router = new Router({
     {
       path:'',
       name:'cat-breeds',
-      component: CatBreeds
+      component: CatBreeds,
+      props: true
     },
     {
       path:'/favourites',

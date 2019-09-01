@@ -7,7 +7,7 @@
     </div>
     <div id="details" >
       <h2 v-if="!favouriteBreeds.length && faveBreedsSelected">You have not selected any favourite breeds! Add some <router-link :to="{ name: 'cat-breeds'}">here</router-link>!</h2>
-      <FavouriteBreeds v-if="favouriteBreeds.length && faveBreedsSelected" :favouriteBreeds="favouriteBreeds" />
+      <FavouriteBreeds v-if="favouriteBreeds.length && faveBreedsSelected" :favouriteBreeds="favouriteBreeds" :favouriteBreedsData="favouriteBreedsData" />
     </div>
   </div>
 </template>
@@ -17,7 +17,7 @@ import FavouriteBreeds from '@/components/FavouriteBreeds.vue'
 
 export default {
   name:'favourites',
-  props:['favouriteBreeds'],
+  props:['favouriteBreeds', 'favouriteBreedsData'],
   data(){
     return{
       faveBreedsSelected:true,

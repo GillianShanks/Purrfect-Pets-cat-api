@@ -1,16 +1,25 @@
 <template lang="html">
   <div id="mini-details">
+    <router-link :to="{ name: 'cat-breeds', params: {breed}}">More info</router-link>
+    <h3>{{breed.temperament}}</h3>
     <div id="details">
-      <h3>{{breed.temperament}}</h3>
-      <BreedDetailGraph :chartData="chartData" :chartOptions="chartOptions" />
+      <div id="graph">
+        <BreedDetailGraph :chartData="chartData" :chartOptions="chartOptions" />
+      </div>
+      <div id="img-points">
+        <img :src="breedImageLink" :alt="breed.name">
+        <BreedInterestingPoints :breed="breed" />
+      </div>
+
     </div>
-    <img :src="breedImageLink" :alt="breed.name">
+
   </div>
 
 </template>
 
 <script>
 import BreedDetailGraph from '@/components/BreedDetailGraph.vue';
+import BreedInterestingPoints from '@/components/BreedInterestingPoints';
 
 export default {
   name:'mini-details',
@@ -48,11 +57,12 @@ export default {
       height: 500,
       backgroundColor: '#82acb3',
       colors: ['white'],
-      hAxis:{viewWindow:{max:5}}
+      hAxis:{viewWindow:{min:0, max:5}}
     }
   },
   components: {
-    BreedDetailGraph
+    BreedDetailGraph,
+    BreedInterestingPoints
   }
 }
 </script>
@@ -61,19 +71,27 @@ export default {
 #mini-details{
   margin-left:2em;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
 }
 #details{
+  display:flex;
+  flex-direction: row;
+
+}
+#graph{
   display:flex;
   flex:1;
   align-self:flex-start;
   flex-direction: column;
   padding-right: 2em;
 }
+#img-points{
+  width: 50%;
+}
 img{
   align-self: center;
-  width:50%;
-  height: 50%;
+  width:100%;
+  /* height: 50%; */
 }
 </style>

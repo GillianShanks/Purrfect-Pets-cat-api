@@ -2,6 +2,7 @@
   <div id="detail-view">
     <div id="title-section">
       <h2>{{breed.name}}</h2>
+      <!-- another attempt to remove alt_names with spaces only -->
       <h3 v-if="breed.alt_names && breed.alt_names !== ' '">(alt names: {{breed.alt_names}})</h3>
     </div>
     <p>Temperament: {{breed.temperament}}</p>

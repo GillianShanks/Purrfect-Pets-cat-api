@@ -14,7 +14,7 @@ import {eventBus} from '@/main.js';
 
 export default {
   name: "cat-breeds",
-  props:['breeds'],
+  props:['breeds', 'breed'],
   data(){
     return{
       selectedBreed: null,
@@ -26,7 +26,18 @@ export default {
       loading:null
     }
   },
+  methods:{
+    getExtraBreedInfo(breed){
+
+    }
+  },
   mounted(){
+    if (this.breed){
+      this.selectedBreed=this.breed;
+    }
+    //but then it does not set up all the stuff in the eventBus, even pasting all the info below doesn't work.
+
+
     eventBus.$on('selected-breed', (breed) => {
       this.selectedBreed=breed;
 
@@ -56,7 +67,7 @@ export default {
         height: 500,
         backgroundColor: '#82acb3',
         colors: ['white'],
-        hAxis:{viewWindow:{max:5}}
+        hAxis:{viewWindow:{min:0, max:5}}
       }
       this.loading=false;
 
