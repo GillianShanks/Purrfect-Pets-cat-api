@@ -7,14 +7,12 @@
         <option v-for="(breed, index) in breeds" :value="breed">{{breed.name}}</option>
       </select>
     </div>
-    <div id="fav-button" v-if="selectedBreed">
-      <button id="add" v-if="!selectedBreed.isFavourite" @click="toggleFavouriteBreed">Add to Favourites</button>
-      <button id="remove" v-if="selectedBreed.isFavourite" @click="toggleFavouriteBreed">Remove from Favourites</button>
-    </div>
+    <FavBreedButton :selectedBreed="selectedBreed"/>
   </div>
 </template>
 
 <script>
+import FavBreedButton from '@/components/FavBreedButton.vue'
 import {eventBus} from '@/main.js';
 
 export default {
@@ -38,10 +36,11 @@ export default {
       });
       eventBus.$emit("selected-breed", this.selectedBreed);
     },
-    toggleFavouriteBreed(){
-      this.selectedBreed.isFavourite ? this.selectedBreed.isFavourite = false : this.selectedBreed.isFavourite = true;
-    }
 
+
+  },
+  components:{
+    FavBreedButton
   }
 
 }
@@ -66,32 +65,21 @@ input, select{
   align-self: center;
   font-size: 1.1em;
   border: 1px solid #612191;
-  background-color: #f7bcf6;
+  background-color: rgba(255,255,255,0.3);
   outline: none;
-}
-
-button{
-  /* border: 1px solid green; */
-  border-radius: 4px;
-  font-size: 1em;
-  align-self: center;
-  outline: none;
-  background-color: #f7bcf6;
-  border: 1px solid #612191;
-}
-
-button:hover{
- background-color:#cc5eca;
-}
-
-button:active{
-  background-color:#612191;
+  color: white;
 
 }
-
+::placeholder{
+  color:white;
+  opacity: 0.5;
+}
 select:hover{
   background-color:#cc5eca;
 
+}
+select:active{
+  background-color: #612191;
 }
 
 </style>

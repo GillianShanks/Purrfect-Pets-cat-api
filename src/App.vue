@@ -37,6 +37,7 @@ export default {
       let breedsData=data;
       breedsData.forEach((breed) => {
         breed.isFavourite=false;
+        breed.showMiniBreed=false;
       });
       this.breeds = breedsData;
     })

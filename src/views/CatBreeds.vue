@@ -1,6 +1,7 @@
 <template lang="html">
   <div id="breeds-view">
     <SearchFormCatBreeds :breeds="breeds" />
+    <h2 v-if="!selectedBreed">Click above or type in the search bar to find what might be your favourite cat breed!</h2>
     <BreedDetail v-if="selectedBreed" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" />
   </div>
 </template>
@@ -51,6 +52,20 @@ export default {
     flex:1;
     height: 80vh;
     overflow-y: scroll;
+  }
+
+  h2{
+    color: white;
+    text-align: center;
+    font-weight: lighter;
+    font-style: italic;
+    font-size: 1.8em;
+    background-color: rgba(255,255,255,0.2);
+    border: white 1px solid;
+    border-radius: 4px;
+    width: 60%;
+    align-self: center;
+    margin: 1em;
   }
 
 </style>

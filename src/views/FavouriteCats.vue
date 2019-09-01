@@ -6,6 +6,7 @@
       <h3 v-if="faveBreedsSelected" class="selected" @click="toggleBreedsClick">Breeds</h3>
     </div>
     <div id="details" >
+      <h2 v-if="!favouriteBreeds.length && faveBreedsSelected">You have not selected any favourite breeds! Add some <router-link :to="{ name: 'cat-breeds'}">here</router-link>!</h2>
       <FavouriteBreeds v-if="favouriteBreeds.length && faveBreedsSelected" :favouriteBreeds="favouriteBreeds" />
     </div>
   </div>
@@ -77,6 +78,19 @@ h3:active{
 }
 .selected{
   background-color: #612191;
+}
+
+a{
+  text-decoration: none;
+  color: white;
+  padding:0.2em;
+  border-radius: 4px;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid #612191;
+}
+
+a:hover{
+  background-color: #cc5eca;
 }
 
 

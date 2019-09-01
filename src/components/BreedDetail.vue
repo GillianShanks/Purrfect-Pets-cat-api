@@ -9,6 +9,7 @@
       <div id="info-section">
         <p>Origin: {{breed.origin}}</p>
         <p>Life-span: {{breed.life_span}} years</p>
+        <BreedDetailGraph />
         <div v-if="interestingList">
           <p>Interesting points:</p>
           <ul id="interesting">
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import BreedDetailGraph from '@/components/BreedDetailGraph'
 export default {
   name: "breed-detail",
   props: ['breed', 'interestingPoints', 'breedImageLink'],

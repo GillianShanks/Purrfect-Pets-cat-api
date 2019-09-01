@@ -37,8 +37,20 @@ h1{
 }
 
 a {
-  padding: 0.5em;
+  text-decoration: none;
+  background-color: rgba(255,255,255,0.2);
+  border: 1px solid white;
+
+  padding: 0.3em 1em 0.3em 1em;
+  margin-bottom: 0.5em;
   font-size: 1.2em;
   color: white;
+}
+a:hover{
+  background-color: #cc5eca;
+}
+a:active{
+  background-color: #612191;
+
 }
 </style>
