@@ -2,7 +2,8 @@
   <div id="breeds-view">
     <SearchFormCatBreeds :breeds="breeds" />
     <h2 v-if="!selectedBreed">Click above or type in the search bar to find what might be your favourite cat breed!</h2>
-    <BreedDetail v-if="selectedBreed" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" :chartData="chartData" :chartOptions="chartOptions" :loading="loading"/>
+    <h2 v-if="selectedBreed && !breedImageLink.length">Loading Info...</h2>
+    <BreedDetail v-if="selectedBreed && breedImageLink.length" :breed="selectedBreed" :interestingPoints="interestingPoints" :breedImageLink="breedImageLink" :chartData="chartData" :chartOptions="chartOptions" :loading="loading"/>
   </div>
 </template>
 
@@ -39,6 +40,7 @@ export default {
 
 
     eventBus.$on('selected-breed', (breed) => {
+      this.breedImageLink="";
       this.selectedBreed=breed;
 
       this.interestingPoints= [breed.rare, breed.suppressed_tail, breed.hairless, breed.rex, breed.short_legs, breed.hypoallergenic, breed.lap];
